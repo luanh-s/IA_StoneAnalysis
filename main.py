@@ -78,7 +78,7 @@ async def ask_agent(request: Request):
                     for ped in pedidos:
                         for field in fieldList:
                             contexto_cliente += (
-                                f"{ped.get(field, f'Unknown {field}')} "
+                                f"{ped.get(field, f'Unknown {field}')} - "
                             )
                         contexto_cliente += "\n"
                 else:
