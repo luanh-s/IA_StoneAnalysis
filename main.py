@@ -59,6 +59,7 @@ async def ask_agent(request: Request):
     pergunta = data.get("message", "")
     modelo = data.get("modelo", "chatgpt")  # "chatgpt" é o padrão
     account_id = data.get("account_id", None)
+    fieldList = data.get("fieldList", [])
 
     # contextos = rag.consultar(pergunta)
 
@@ -74,10 +75,11 @@ async def ask_agent(request: Request):
                 if pedidos:
                     contexto_cliente += "Orders:\n"
                     for ped in pedidos:
-                        contexto_cliente += (
-                            f"- {ped.get('TotalAmount', 'Unknown TotalAmount')} "
-                            f"{ped.get('Descricao_Draft__c', 'Unknown Descricao_Draft__c')}\n"
-                        )
+                        for field in fieldList:
+                            contexto_cliente += (
+                                f"{ped.get(field, f'Unknown {field}')} "
+                            )
+                            contexto_cliente += "\n"
                 else:
                     contexto_cliente += "No Orders found.\n"
 
