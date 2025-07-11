@@ -18,18 +18,19 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 # cache_lock = Lock()
 
 def autenticar_salesforce():
-    url = SF_ENDPOINT + "/services/oauth2/token"
-    data = {
-        "grant_type": "client_credentials",
-        "client_id": SF_CLIENT_ID,
-        "client_secret": SF_CLIENT_SECRET
-    }
-    logging.info("Autenticando com client_credentials...")
-    res = requests.post(url, data=data)
-    res.raise_for_status()
-    auth = res.json()
-    logging.info("Token recebido com sucesso.")
-    return auth["access_token"], auth["instance_url"]
+    return os.getenv("SF_ACCESS_TOKEN"), os.getenv("SF_ENDPOINT")
+    # url = SF_ENDPOINT + "/services/oauth2/token"
+    # data = {
+    #     "grant_type": "client_credentials",
+    #     "client_id": SF_CLIENT_ID,
+    #     "client_secret": SF_CLIENT_SECRET
+    # }
+    # logging.info("Autenticando com client_credentials...")
+    # res = requests.post(url, data=data)
+    # res.raise_for_status()
+    # auth = res.json()
+    # logging.info("Token recebido com sucesso.")
+    # return auth["access_token"], auth["instance_url"]
 
 def buscar_contato_e_veiculos(contact_id):
     cache_path = os.path.join(CACHE_DIR, f"{contact_id}.json")
