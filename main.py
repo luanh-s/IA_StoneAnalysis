@@ -60,13 +60,14 @@ async def ask_agent(request: Request):
     modelo = data.get("modelo", "chatgpt")  # "chatgpt" é o padrão
     account_id = data.get("account_id", None)
     fieldList = data.get("fieldList", [])
+    queryFieldList = data.get("queryFieldList", [])
 
     # contextos = rag.consultar(pergunta)
 
     contexto_cliente = ""
     if account_id:
         try:
-            cliente = buscar_cliente_e_pedidos(account_id)
+            cliente = buscar_cliente_e_pedidos(account_id, queryFieldList)
             logging.info(f"cliente: {repr(cliente)}")
             if cliente:
                 contexto_cliente += f"Customer: {cliente.get('nome', 'Unknown')}\n"
@@ -79,7 +80,7 @@ async def ask_agent(request: Request):
                             contexto_cliente += (
                                 f"{ped.get(field, f'Unknown {field}')} "
                             )
-                            contexto_cliente += "\n"
+                        contexto_cliente += "\n"
                 else:
                     contexto_cliente += "No Orders found.\n"
 
