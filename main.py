@@ -22,9 +22,9 @@ app.add_middleware(
 
 # Inicializa FaissRAG
 rag = FaissRAG()
-with open("data/articles.txt", "r", encoding="utf-8") as f:
-    for artigo in f.read().split("\n---\n"):
-        rag.adicionar_texto(artigo.strip())
+# with open("data/articles.txt", "r", encoding="utf-8") as f:
+#     for artigo in f.read().split("\n---\n"):
+#         rag.adicionar_texto(artigo.strip())
 
 # Configuração da chave da OpenAI
 openai.api_key = os.getenv("OPENAI_API_KEY")  # Ou defina diretamente: openai.api_key = "sua-chave-aqui"

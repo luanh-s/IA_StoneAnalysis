@@ -33,7 +33,7 @@ def autenticar_salesforce():
     # return auth["access_token"], auth["instance_url"]
 
 def buscar_contato_e_veiculos(contact_id):
-    cache_path = os.path.join(CACHE_DIR, f"{contact_id}.json")
+    # cache_path = os.path.join(CACHE_DIR, f"{contact_id}.json")
     try:
         token, instance_url = autenticar_salesforce()
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
