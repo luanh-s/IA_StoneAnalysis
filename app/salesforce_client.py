@@ -99,7 +99,7 @@ def buscar_cliente_e_pedidos(account_id):
             raise ValueError("Cliente não encontrado.")
         cliente = cliente_data[0]
 
-        soql_orders = f"SELECT Id, Name, TotalAmount, Descricao_Draft__c FROM Order WHERE AccountId = '{account_id}'"
+        soql_orders = f"SELECT Id, Name, TotalAmount, Descricao_Draft__c, Status, BillingCity FROM Order WHERE AccountId = '{account_id}'"
         res2 = requests.get(url_query, headers=headers, params={"q": soql_orders})
         res2.raise_for_status()
 
